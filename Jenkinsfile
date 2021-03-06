@@ -19,6 +19,16 @@ pipeline {
                 sh 'mvn test'
             }
             }
+        stage('Junit') {
+            steps {
+                junit 'target/surefire-reports/*.xml'
+            }
+            }
+            stage('archival') {
+            steps {
+                archiveArtifacts 'target/*.jar'
+            }
+            }
         stage ('Artifactory configuration') {
             steps {
              rtServer (
